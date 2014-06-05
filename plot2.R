@@ -7,16 +7,16 @@ plot2 <- function () {
                         header = TRUE,
                         sep = ";",
                         na.strings = "?",
-                        colClasses = c(rep("character",2),rep("numeric",7)),
-                        comment.char = "")
+                        comment.char = "",
+                        colClasses = c(rep("character",2),rep("numeric",7)))
   
   # Merge the Date and Time columns into something more useful
-  my.data$DateTime <- paste(my.data$Date,my.data$Time)
-  my.data$DateTime <- strptime(my.data$DateTime, "%d/%m/%Y %H:%M:%S", tz = "")
+  my.data$DateTime <- strptime(paste(my.data$Date, my.data$Time),
+                               "%d/%m/%Y %H:%M:%S", tz = "")
   
   # Generate the chart and write to file
-  png(filename = "plot2.png",width = 480, height = 480)
-  plot(my.data$DateTime,my.data$Global_active_power,
+  png(filename = "plot2.png", width = 480, height = 480)
+  plot(my.data$DateTime, my.data$Global_active_power,
         type = "l",
         xlab = "", ylab = "Global Active Power (kilowatts)")
   dev.off()
